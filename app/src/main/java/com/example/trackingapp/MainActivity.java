@@ -1,71 +1,60 @@
 package com.example.trackingapp;
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
-import android.app.Activity;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+import java.awt.event.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import javax.swing.JCheckBox;
 
-import androidx.annotation.NonNull;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.ListView;
+
 import androidx.fragment.app.FragmentActivity;
 
-import com.example.trackingapp.databinding.ActivityMainBinding;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.Scopes;
-import com.google.android.gms.common.api.Api;
-import com.google.android.gms.common.api.GoogleApi;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.PendingResult;
-import com.google.android.gms.common.api.Scope;
-import com.google.android.gms.common.api.Status;
-import com.google.android.gms.fitness.Fitness;
+public class MainActivity extends FragmentActivity implements ItemListener {
 
-import java.util.concurrent.TimeUnit;
-
-public class MainActivity extends FragmentActivity {
-
-    private TextView mTextView;
-    private ImageView imageView;
-    private ActivityMainBinding binding;
-    private float[] heartRateData;
+    private final String TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.i(TAG, "onCreate");
 
-
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-
-
-        //Referenz ImageView & startButton
+        //Get references to the main UI components
+        CheckBox heartRate = findViewById(R.id.heartRate);
+        heartRate.addItemListener(this);
+        CheckBox heartRateVariability = findViewById(R.id.heartRateVariability);
+        CheckBox skinTemperature = findViewById(R.id.skinTemperature);
         Button startButton = findViewById(R.id.startButton);
 
-        //OnClickListener für startButton
-        startButton.setOnClickListener(new View.OnClickListener() {
+        startButton.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v) {
-                String message = "Aufnahme gestartet";
-                Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT);
+            public void onClick(View view) {
+                setContentView(R.layout.activity_heart_rate);
             }
         });
 
-        /* Hier API Integration
-        heartRateGraphView = findViewById(R.id.)
-        */
+        //More sensors to add here, if needed
+        //Probably belongs in onClick above..?
+        String[] values = new String[]{"HeartRate"};
+        ListView mListView = findViewById(R.id.sensors_list_view);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, values);
+        mListView.setAdapter(adapter);
+        mListView.setOnItemClickListener( (parent, view, position, id) -> {
+            startActivity(new Intent(this, HeartRateActivity.class));
+        });
+
     }
 
-    public void setHeartRateData(float[] data) {
-        heartRateData = data;
-
-        //Aktualisiere die Ansicht mit neuen Daten
-        //heartRateGraphView.setDataPoints(heartRateData);
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i(TAG, "onDestroy");
     }
-
 }

@@ -1,55 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.wear.widget.BoxInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="@dimen/box_inset_layout_padding"
-    tools:context=".MainActivity"
-    tools:deviceIds="wear">
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools">
 
-    <RelativeLayout
+    <androidx.wear.widget.BoxInsetLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/inner_frame_layout_padding"
-        app:layout_boxedEdges="all">
+        tools:context=".MainActivity"
+        tools:deviceIds="wear">
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:padding="@dimen/inner_frame_layout_padding"
+            app:boxedEdges="all"
+            tools:ignore="MissingPrefix">
 
-            <CheckBox
-                android:id="@+id/heartRate"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:buttonTint="@color/cyan"
-                android:text="HeartRate" />
-
-            <CheckBox
-                android:id="@+id/heartRateVariability"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:buttonTint="@color/cyan"
-                android:text="HeartRate Variability" />
-
-            <CheckBox
-                android:id="@+id/skinTemperature"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:buttonTint="@color/cyan"
-                android:text="Skin Temperature" />
-
-            <Button
-                android:id="@+id/startButton"
+            <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:onClick="startDataRecording"
-                android:text="Start Recording"
-                android:textColor="@color/cyan" />
+                android:orientation="vertical">
 
-        </LinearLayout>
+                <CheckBox
+                    android:id="@+id/heartRate"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:buttonTint="@color/cyan"
+                    android:text="Heartrate" />
 
-    </RelativeLayout>
-</androidx.wear.widget.BoxInsetLayout>
+                <CheckBox
+                    android:id="@+id/heartRateVariability"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:buttonTint="@color/cyan"
+                    android:text="Heartrate Variability" />
+
+                <CheckBox
+                    android:id="@+id/skinTemperature"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:buttonTint="@color/cyan"
+                    android:text="Skin Temperature" />
+
+                <Button
+                    android:id="@+id/startButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:onClick="startDataRecording"
+                    android:text="Start Recording"
+                    android:textColor="@color/cyan" />
+
+            </LinearLayout>
+        </FrameLayout>
+    </androidx.wear.widget.BoxInsetLayout>
+
+</layout>
