@@ -1,55 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.wear.widget.BoxInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools">
+
+<androidx.wear.widget.BoxInsetLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/box_inset_layout_padding"
     tools:context=".MainActivity"
     tools:deviceIds="wear">
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:padding="@dimen/inner_frame_layout_padding"
-        app:layout_boxedEdges="all">
+        app:boxedEdges="all"
+        tools:ignore="MissingPrefix">
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <CheckBox
-                android:id="@+id/heartRate"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:buttonTint="@color/cyan"
-                android:text="HeartRate" />
-
-            <CheckBox
-                android:id="@+id/heartRateVariability"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:buttonTint="@color/cyan"
-                android:text="HeartRate Variability" />
-
-            <CheckBox
-                android:id="@+id/skinTemperature"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:buttonTint="@color/cyan"
-                android:text="Skin Temperature" />
-
-            <Button
-                android:id="@+id/startButton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:onClick="startDataRecording"
-                android:text="Start Recording"
-                android:textColor="@color/cyan" />
-
-        </LinearLayout>
-
-    </RelativeLayout>
+        <ListView
+            android:id="@+id/sensors_list_view"
+            android:layout_width="fill_parent"
+            android:layout_height="10dp" />
+    </FrameLayout>
 </androidx.wear.widget.BoxInsetLayout>
+</layout>
